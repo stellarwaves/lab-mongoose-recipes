@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 const data = require('./data.js');
+//const fs = require('fs');
 
 const recipeSchema = new Schema({
   title: {
@@ -17,7 +18,7 @@ const recipeSchema = new Schema({
     type: Array,
     required: true
   },
-  cousine: {
+  cuisine: {
     type: String,
     required: true
   },
@@ -46,9 +47,22 @@ const recipeSchema = new Schema({
   }
 })
 
+const Recipes = mongoose.model('Recipes', recipeSchema);
+
 mongoose.connect('mongodb://localhost/recipeApp')
   .then(() => {
     console.log('Connected to Mongo!');
   }).catch(err => {
     console.error('Error connecting to mongo', err);
   });
+
+
+Recipes.find({title: 'Asian Glazed Chicken Thighs'})
+  .then(result  => {
+    console.log(result);
+    mongoose.connection.close();
+  }).catch(err => console.log(err));
+
+
+
+
