@@ -57,9 +57,9 @@ mongoose.connect('mongodb://localhost/recipeApp')
   });
 
 
-Recipes.find({title: 'Asian Glazed Chicken Thighs'})
+Recipes.findOneAndDelete({title: 'Carrot Cake'})
   .then(result  => {
-    console.log(result);
+    console.log('éxito');
     mongoose.connection.close();
   }).catch(err => console.log(err));
 
